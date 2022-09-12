@@ -67,39 +67,39 @@ void readStudentsFile(student *students[], int size)
   }
 }
 
-void printStatsLine(classStats stats)
+void printStatsLine(classStats *stats)
 {
   cout.precision(2);
 
-  cout << "CSCE 1040  MEAN " << fixed << stats.mean
-       << " MIN: " << fixed << stats.min
-       << " MAX: " << fixed << stats.max
-       << " MEDIAN: " << fixed << stats.median
+  cout << "CSCE 1040  MEAN " << fixed << stats->mean
+       << " MIN: " << fixed << stats->min
+       << " MAX: " << fixed << stats->max
+       << " MEDIAN: " << fixed << stats->median
        << endl;
 }
 
-void calcClassStats(classStats stats, student *students[], int size)
+void calcClassStats(classStats *stats, student *students[], int size)
 {
-  stats.max = students[0]->mean;
-  stats.min = students[0]->mean;
-  stats.mean = students[0]->mean;
+  stats->max = students[0]->mean;
+  stats->min = students[0]->mean;
+  stats->mean = students[0]->mean;
 
   for (int i = 1; i < size; i++)
   {
-    if (students[i]->mean > stats.max)
-      stats.max = students[i]->mean;
+    if (students[i]->mean > stats->max)
+      stats->max = students[i]->mean;
 
-    if (students[i]->mean < stats.min)
-      stats.min = students[i]->mean;
+    if (students[i]->mean < stats->min)
+      stats->min = students[i]->mean;
 
-    stats.mean += students[i]->mean;
+    stats->mean += students[i]->mean;
   }
 
-  stats.mean = stats.mean / size;
+  stats->mean = stats->mean / size;
 
-  stats.median = students[size / 2]->mean;
+  stats->median = students[size / 2]->mean;
 
-  printStatsLine(stats);
+  // printStatsLine(stats);
 }
 
 int main()
@@ -112,7 +112,9 @@ int main()
 
   bubble(students, CNT);
 
-  calcClassStats(stats, students, CNT);
+  calcClassStats(&stats, students, CNT);
+
+  printStatsLine(&stats);
 
   printAllStudents(students, CNT);
 
