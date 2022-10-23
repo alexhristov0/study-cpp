@@ -52,7 +52,7 @@ student *readStudentLine(string lineInput)
   return s;
 }
 
-void readStudentsFile(student *students[], int size)
+void readStudentsFile(student *students[])
 {
   string lineInput;
   int i = -1;
@@ -108,7 +108,7 @@ int main()
   const int CNT = 19;
   student *students[CNT];
 
-  readStudentsFile(students, CNT);
+  readStudentsFile(students);
 
   bubble(students, CNT);
 
