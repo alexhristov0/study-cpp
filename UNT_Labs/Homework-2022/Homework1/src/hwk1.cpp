@@ -57,7 +57,11 @@ student *readStudentLine(string lineInput) //reads lineInput into the student st
   return s;
 }
 
+<<<<<<< HEAD:Labs/Homework/Homework1/hwk1.cpp
 void readStudentsFile(student *students[], int size) //copies data file into lineInput and calls readStudentLine
+=======
+void readStudentsFile(student *students[])
+>>>>>>> fdfa200b5c44a77f46ef7445c6391b7a36dd701d:UNT_Labs/Homework-2022/Homework1/src/hwk1.cpp
 {
   string lineInput;
   int i = -1;
@@ -115,7 +119,7 @@ int main()
   const int CNT = 19; //represents number of students in the data file
   student *students[CNT]; //creates array of structures for students
 
-  readStudentsFile(students, CNT);
+  readStudentsFile(students);
 
   bubble(students, CNT);
 
