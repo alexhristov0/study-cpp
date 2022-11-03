@@ -1,5 +1,11 @@
-// DOCUMENTATION GOES HERE
-
+/*
+Name: Alexander Hristov
+ID: 11497589
+Date: 9/9/2022
+File: hwk1.cpp
+Summary: output mean, median, max , min, and sorted list from data file of students
+*PLEASE use file redirection when running the program (send the data file into hwk1.cpp)
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -9,7 +15,7 @@
 
 using namespace std;
 
-typedef struct class_stats
+typedef struct class_stats //struct containing data for the output
 {
   float mean;
   float min;
@@ -18,14 +24,13 @@ typedef struct class_stats
   char *name;
 } classStats;
 
-void printStudent(student *s)
+void printStudent(student *s) //prints out one student from the list of students
 {
   cout.precision(2);
-  cout
-      << s->first << " " << s->last << " " << fixed << s->mean << endl;
+  cout << s->first << " " << s->last << " " << fixed << s->mean << endl;
 }
 
-void printAllStudents(student *students[], int size)
+void printAllStudents(student *students[], int size) //prints out all students by looping the number of students and calling printStudent
 {
   for (int i = 0; i < size; i++)
   {
@@ -33,7 +38,7 @@ void printAllStudents(student *students[], int size)
   }
 }
 
-student *readStudentLine(string lineInput)
+student *readStudentLine(string lineInput) //reads lineInput into the student structure
 {
   char *first = (char *)calloc(10, sizeof(char));
   char *last = (char *)calloc(10, sizeof(char));
@@ -52,7 +57,7 @@ student *readStudentLine(string lineInput)
   return s;
 }
 
-void readStudentsFile(student *students[], int size)
+void readStudentsFile(student *students[], int size) //copies data file into lineInput and calls readStudentLine
 {
   string lineInput;
   int i = -1;
@@ -67,7 +72,7 @@ void readStudentsFile(student *students[], int size)
   }
 }
 
-void printStatsLine(classStats *stats)
+void printStatsLine(classStats *stats) //print variables from the classStats structure
 {
   cout.precision(2);
 
@@ -78,7 +83,7 @@ void printStatsLine(classStats *stats)
        << endl;
 }
 
-void calcClassStats(classStats *stats, student *students[], int size)
+void calcClassStats(classStats *stats, student *students[], int size) //calculates data into min, max, mean and median
 {
   stats->max = students[0]->mean;
   stats->min = students[0]->mean;
@@ -87,10 +92,14 @@ void calcClassStats(classStats *stats, student *students[], int size)
   for (int i = 1; i < size; i++)
   {
     if (students[i]->mean > stats->max)
+    {
       stats->max = students[i]->mean;
+    }
 
     if (students[i]->mean < stats->min)
+    {
       stats->min = students[i]->mean;
+    }
 
     stats->mean += students[i]->mean;
   }
@@ -98,15 +107,13 @@ void calcClassStats(classStats *stats, student *students[], int size)
   stats->mean = stats->mean / size;
 
   stats->median = students[size / 2]->mean;
-
-  // printStatsLine(stats);
 }
 
 int main()
 {
-  classStats stats = {0, 0, 0, 0, new char()};
-  const int CNT = 19;
-  student *students[CNT];
+  classStats stats = {0, 0, 0, 0, new char()}; //create classStats struct
+  const int CNT = 19; //represents number of students in the data file
+  student *students[CNT]; //creates array of structures for students
 
   readStudentsFile(students, CNT);
 
